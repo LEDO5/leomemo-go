@@ -19,18 +19,24 @@
             background: white;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            animation: slideIn 1s ease-in-out;
         }
         .profile-pic {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             background-color: #ddd;
-            display: inline-block;
+            background-image: url('default-profile-pic.png'); /* Default profile picture */
             background-size: cover;
             background-position: center;
+            margin: 20px auto;
+            animation: pulse 2s ease-in-out infinite;
         }
         .info {
-            margin: 10px 0;
+            margin-bottom: 10px;
             font-size: 18px;
         }
         .social-button {
@@ -42,9 +48,31 @@
             color: white;
             border: none;
             border-radius: 5px;
+            transition: background-color 0.3s;
         }
         .social-button:hover {
             background-color: #0056b3;
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -70,9 +98,15 @@
             const password = localStorage.getItem('password');
             const profilePic = localStorage.getItem('profilePic');
 
-            document.getElementById('profileName').textContent = name;
-            document.getElementById('profileEmail').textContent = email;
-            document.getElementById('profilePassword').textContent = password;
+            if (name) {
+                document.getElementById('profileName').textContent = name;
+            }
+            if (email) {
+                document.getElementById('profileEmail').textContent = email;
+            }
+            if (password) {
+                document.getElementById('profilePassword').textContent = password;
+            }
             if (profilePic) {
                 document.getElementById('profilePic').style.backgroundImage = `url(${profilePic})`;
             }
